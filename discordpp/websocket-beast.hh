@@ -6,6 +6,7 @@
 #define DISCORDPP_WEBSOCKET_BEAST_HH
 
 #include <boost/beast.hpp>
+#include <boost/beast/core/buffers_to_string.hpp>
 #include <boost/beast/websocket/ssl.hpp>
 
 namespace discordpp {
@@ -34,7 +35,7 @@ namespace discordpp {
             json jres;
             {
                 std::ostringstream ss;
-                ss << boost::beast::buffers(buffer_.data());
+                ss << boost::beast::buffers_to_string(buffer_.data());
                 buffer_.consume(buffer_.size());
                 //std::cerr << "Got " << ss.str() << '\n';
                 jres = json::parse(ss.str());
